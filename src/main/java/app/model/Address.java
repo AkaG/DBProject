@@ -7,6 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "ADDRESSES")
 public class Address {
 
     @Id
@@ -26,6 +27,7 @@ public class Address {
 }
 
 @Entity
+@Table(name = "CITIES")
 class City {
 
     @Id
@@ -41,6 +43,7 @@ class City {
 }
 
 @Entity
+@Table(name = "COUNTRIES")
 class Country {
 
     @Id
