@@ -1,7 +1,6 @@
-package dao;
+package app.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by jakub on 06.12.16.
