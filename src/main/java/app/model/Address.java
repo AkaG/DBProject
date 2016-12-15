@@ -18,7 +18,7 @@ public class Address {
     @Column(nullable = false)
     private int streetNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IdCity")
     private City city;
 
@@ -26,34 +26,4 @@ public class Address {
         this.street = street;
         this.streetNumber = streetNumber;
     }
-}
-
-@Entity
-@Table(name = "CITIES")
-class City {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String postalCode;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdCountry")
-    private Country country;
-
-}
-
-@Entity
-@Table(name = "COUNTRIES")
-class Country {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(nullable = false)
-    private String name;
-    private int countryCode;
 }

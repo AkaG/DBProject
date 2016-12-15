@@ -1,7 +1,6 @@
 package app.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by jakub on 15.12.16.
@@ -20,11 +19,11 @@ public class Staff {
     @Column(nullable = false)
     private double salary;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IdAddress")
     Address address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "IdMovieRental")
     MovieRental movieRental;
 }
