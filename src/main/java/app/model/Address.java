@@ -13,7 +13,9 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(nullable = false)
     private String street;
+    @Column(nullable = false)
     private int streetNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,7 +35,9 @@ class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String postalCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -49,6 +53,7 @@ class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String name;
     private int countryCode;
 }
