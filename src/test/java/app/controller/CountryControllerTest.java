@@ -2,6 +2,7 @@ package app.controller;
 
 import app.model.Country;
 import app.repository.CountryRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.toIntExact;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -40,15 +38,29 @@ public class CountryControllerTest {
     @Autowired
     CountryRepository countryRepository;
 
-    List<Country> countries = new ArrayList<>();
+    List<Country> countries;
+    ObjectMapper mapper;
+
+    private boolean isSetupDone = false;
 
     @Before
     public void setUp() throws Exception {
+        if (isSetupDone) return;
+        isSetupDone = true;
+
         mockMvc = webAppContextSetup(webApplicationContext).build();
 
-        Country country = new Country("testCountry", 123);
+        countries = new ArrayList<>();
+        mapper = new ObjectMapper();
+
+        Country country = new Country("testCountry", 1);
         country.setId(1L);
         countries.add(countryRepository.save(country));
+
+        Country country1 = new Country("testCountry1", 2);
+        country1.setId(2L);
+        countries.add(countryRepository.save(country1));
+
     }
 
     @Test
@@ -56,10 +68,7 @@ public class CountryControllerTest {
         mockMvc.perform(get("/country"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].name", is("testCountry")))
-                .andExpect(jsonPath("$[0].countryCode", is(123)));
+                .andExpect(jsonPath("$", hasSize(greaterThan(0))));
     }
 
     @Test
@@ -75,17 +84,40 @@ public class CountryControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
+        Country country = countries.get(0);
+        country.setName("updateTest");
+        country.setCountryCode(3);
 
+        mockMvc.perform(put("/country/"
+                + country.getId())
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsBytes(country)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", is(toIntExact(country.getId()))))
+                .andExpect(jsonPath("$.name", is(country.getName())))
+                .andExpect(jsonPath("$.countryCode", is(country.getCountryCode())));
     }
 
     @Test
     public void testCreate() throws Exception {
+        Country country = new Country("testCreate", 4);
 
+        mockMvc.perform(post("/country/")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsBytes(country)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.id", any(Integer.class)))
+                .andExpect(jsonPath("$.name", is(country.getName())))
+                .andExpect(jsonPath("$.countryCode", is(country.getCountryCode())));
     }
 
     @Test
     public void testDelete() throws Exception {
-
+        mockMvc.perform(delete("/country/"
+                + countries.get(0).getId()))
+                .andExpect(status().isOk());
     }
 
 }
