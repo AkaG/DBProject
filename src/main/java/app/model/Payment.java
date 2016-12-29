@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="person_type",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="payment_type",discriminatorType=DiscriminatorType.STRING)
 public abstract class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,4 +27,54 @@ public abstract class Payment {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     protected Rental rental;
+
+    public Payment() {
+    }
+
+    public Payment(long amount, Calendar date, Customer customer, Rental rental) {
+        this.amount = amount;
+        this.date = date;
+        this.customer = customer;
+        this.rental = rental;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Rental getRental() {
+        return rental;
+    }
+
+    public void setRental(Rental rental) {
+        this.rental = rental;
+    }
 }
