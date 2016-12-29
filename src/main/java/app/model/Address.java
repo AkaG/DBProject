@@ -22,8 +22,44 @@ public class Address {
     @JoinColumn(name = "IdCity")
     private City city;
 
-    public Address(String street, int streetNumber) {
+    public Address() {
+    }
+
+    public Address(String street, int streetNumber, City city) {
         this.street = street;
         this.streetNumber = streetNumber;
+        this.city = city;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }

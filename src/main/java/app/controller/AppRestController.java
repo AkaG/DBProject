@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jakub on 28.12.16.
@@ -38,21 +36,30 @@ public abstract class AppRestController<T, ID extends Serializable> {
         return repository.findOne(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public Map<String, Object> update(@PathVariable ID id, @RequestBody T json) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public T update(@PathVariable ID id, @RequestBody T json) {
         logger.debug("update() of id: {} with body: {}", id, json);
         logger.debug("T json is of type {}", json.getClass());
-        Map<String, Object> result = new HashMap<>();
 
         T entity = repository.findOne(id);
         try {
             BeanUtils.copyProperties(json, entity);
         } catch (Exception e) {
             logger.error(String.valueOf(e));
-            result.put("success", false);
         }
+        return repository.saveAndFlush(entity);
+    }
 
-        result.put("success", true);
-        return result;
+    @RequestMapping(method = RequestMethod.POST)
+    public T create(@RequestBody T json){
+        logger.debug("create() with body {} of type {}", json, json.getClass());
+        T created = this.repository.saveAndFlush(json);
+        return created;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable ID id){
+        logger.debug("delete() of id: {}", id);
+        repository.delete(id);
     }
 }
