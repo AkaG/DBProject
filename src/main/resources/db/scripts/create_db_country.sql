@@ -1,7 +1,0 @@
-CREATE SEQUENCE countries_id_seq;
-CREATE TABLE COUNTRIES(
-  id INTEGER NOT NULL DEFAULT nextval('countries_id_seq') PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  countrycode INTEGER NOT NULL
-);
-ALTER SEQUENCE countries_id_seq OWNED BY COUNTRIES.ID;
