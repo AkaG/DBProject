@@ -10,11 +10,6 @@ export default (
   <Store store={ store }>
     <Router
       history={ history }
-      onUpdate={ () => {
-        if(window.dashboard && window.dashboard.setBreadcrumbs) {
-          window.dashboard.setBreadcrumbs();
-        }
-      } }
       routes={ routes }
     />
   </Store>

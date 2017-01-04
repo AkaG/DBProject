@@ -1,5 +1,5 @@
 /* global apiUrl */
 
 export default {
-  url: `${ apiUrl }`,
+  url: `${ apiUrl }/api`,
 };
