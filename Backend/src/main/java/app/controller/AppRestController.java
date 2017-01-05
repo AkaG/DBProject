@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by jakub on 28.12.16.
- */
-
 public abstract class AppRestController<T, ID extends Serializable> {
 
     protected static Logger logger = LoggerFactory.getLogger(AppRestController.class);

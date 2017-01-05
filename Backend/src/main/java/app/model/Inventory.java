@@ -3,10 +3,6 @@ package app.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by jakub on 15.12.16.
- */
-
 @Entity
 @Table(name = "INVENTORIES")
 public class Inventory implements Serializable{

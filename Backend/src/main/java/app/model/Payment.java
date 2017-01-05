@@ -3,13 +3,9 @@ package app.model;
 import javax.persistence.*;
 import java.util.Calendar;
 
-/**
- * Created by jakub on 15.12.16.
- */
-
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="payment_type",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name="payment_type", discriminatorType=DiscriminatorType.STRING)
 public abstract class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Calendar;
 
-/**
- * Created by jakub on 15.12.16.
- */
-
 @Entity
 @DiscriminatorValue("CASH")
 public class CashPayment extends Payment {
