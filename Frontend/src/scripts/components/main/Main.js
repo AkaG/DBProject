@@ -1,6 +1,6 @@
 import './main.scss';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { map } from 'lodash';
 
 import paths from 'consts/paths';
@@ -26,6 +26,10 @@ const menuItems = map(menu, (key, value) => {
 });
 
 export default class Main extends Component {
+  static propTypes = {
+    children: PropTypes.object,
+  };
+
   render() {
     return (
       <div className="root">
@@ -41,7 +45,9 @@ export default class Main extends Component {
             { menuItems }
           </List>
         </aside>
-        test
+        <article className="content">
+          { this.props.children ? this.props.children : null }
+        </article>
       </div>
     );
   }
