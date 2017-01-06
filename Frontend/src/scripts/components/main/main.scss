@@ -16,6 +16,10 @@
   overflow-y: auto;
 }
 
+.active {
+  background-color: #eee;
+}
+
 .content {
   position: fixed;
   left: 0;

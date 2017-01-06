@@ -1,6 +1,7 @@
 import './main.scss';
 
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 import { map } from 'lodash';
 
 import paths from 'consts/paths';
@@ -15,20 +16,36 @@ const menu = {
   'Movie Rentals': paths.movieRentals,
 };
 
-const menuItems = map(menu, (key, value) => {
-  return (
-    <ListItem
-      selectable
-      caption={ value }
-      key={ key }
-    />
-  );
-});
-
 export default class Main extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
   static propTypes = {
     children: PropTypes.object,
   };
+
+  renderMenuItems() {
+    const {
+      router,
+    } = this.context;
+
+    return (
+      map(menu, (key, value) => {
+        const isActive = router.isActive(key);
+
+        return (
+          <ListItem
+            selectable
+            caption={ value }
+            className={ classnames({ active: isActive }) }
+            key={ key }
+            onClick={ () => { router.push(key); } }
+          />
+        );
+      })
+    );
+  }
 
   render() {
     return (
@@ -42,7 +59,7 @@ export default class Main extends Component {
             selecteable
             className="list"
           >
-            { menuItems }
+            { this.renderMenuItems() }
           </List>
         </aside>
         <article className="content">
