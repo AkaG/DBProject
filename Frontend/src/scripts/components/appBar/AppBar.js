@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   AppBar,
   Navigation,
-  // Link,
+  Link,
 } from 'ui';
 
 export default class App extends Component {
@@ -13,7 +13,10 @@ export default class App extends Component {
         title="Movie Rental"
       >
         <Navigation type="horizontal">
-          test
+          <Link href="/"
+            icon="inbox"
+            label="Test"
+          />
         </Navigation>
       </AppBar>
     );
