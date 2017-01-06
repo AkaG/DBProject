@@ -37,7 +37,13 @@ module.exports = merge(config, {
       },
       {
         test: /(\.scss|\.css)$/,
-        loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass',
+        include: /node_modules/,
+        loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap',
+      },
+      {
+        test: /(\.scss|\.css)$/,
+        exclude: /node_modules/,
+        loader: 'style!css?sourceMap!postcss!sass?sourceMap',
       },
     ],
     preLoaders: [

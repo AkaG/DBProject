@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-import AppBar from 'components/appBar';
+import Main from 'components/main';
 
 class MovieRentals extends Component {
   render() {
     return (
       <div>
-        <AppBar />
+        <Main />
+        test
       </div>
     );
   }
