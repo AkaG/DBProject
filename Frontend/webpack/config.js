@@ -57,6 +57,7 @@ module.exports = {
       modules:    path.resolve('./src/scripts/modules'),
       providers:  path.resolve('./src/scripts/providers'),
       utils:      path.resolve('./src/scripts/utils'),
+      ui:         path.resolve('./node_modules/react-toolbox/lib'),
     },
   },
 };
