@@ -21,6 +21,10 @@ public class Movie {
     public Movie() {
     }
 
+    public Movie(String name) {
+        this.name = name;
+    }
+
     public Movie(String name, int rating, String description, List<Category> categories) {
         this.name = name;
         this.rating = rating;

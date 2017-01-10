@@ -1,7 +1,7 @@
 package app.controller;
 
-import app.model.Country;
-import app.repository.CountryRepository;
+import app.model.Movie;
+import app.repository.MovieRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,16 +26,16 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @ActiveProfiles("test")
-public class CountryControllerTest {
+public class MovieControllerTest {
 
     MockMvc mockMvc;
 
     @Autowired
     WebApplicationContext webApplicationContext;
     @Autowired
-    CountryRepository countryRepository;
+    MovieRepository movieRepository;
 
-    List<Country> countries;
+    List<Movie> movies;
     ObjectMapper mapper;
 
     private boolean isSetupDone = false;
@@ -47,22 +47,22 @@ public class CountryControllerTest {
 
         mockMvc = webAppContextSetup(webApplicationContext).build();
 
-        countries = new ArrayList<>();
+        movies = new ArrayList<>();
         mapper = new ObjectMapper();
 
-        Country country = new Country("testCountry", 1);
-        country.setId(1L);
-        countries.add(countryRepository.save(country));
+        Movie movie = new Movie("testMovie");
+        movie.setId(1L);
+        movies.add(movieRepository.save(movie));
 
-        Country country1 = new Country("testCountry1", 2);
-        country1.setId(2L);
-        countries.add(countryRepository.save(country1));
+        Movie movie1 = new Movie("testMovie2");
+        movie1.setId(2L);
+        movies.add(movieRepository.save(movie1));
 
     }
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get("/country"))
+        mockMvc.perform(get("/movie"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(greaterThan(0))));
@@ -70,50 +70,46 @@ public class CountryControllerTest {
 
     @Test
     public void testGetOne() throws Exception {
-        mockMvc.perform(get("/country/"
-                + countries.get(0).getId()))
+        mockMvc.perform(get("/movie/"
+                + movies.get(0).getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(toIntExact(countries.get(0).getId()))))
-                .andExpect(jsonPath("$.name", is(countries.get(0).getName())))
-                .andExpect(jsonPath("$.countryCode", is(countries.get(0).getCountryCode())));
+                .andExpect(jsonPath("$.id", is(toIntExact(movies.get(0).getId()))))
+                .andExpect(jsonPath("$.name", is(movies.get(0).getName())));
     }
 
     @Test
     public void testUpdate() throws Exception {
-        Country country = countries.get(0);
-        country.setName("updateTest");
-        country.setCountryCode(3);
+        Movie movie = movies.get(0);
+        movie.setName("updateTest");
 
-        mockMvc.perform(put("/country/"
-                + country.getId())
+        mockMvc.perform(put("/movie/"
+                + movie.getId())
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(mapper.writeValueAsBytes(country)))
+                .content(mapper.writeValueAsBytes(movie)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.id", is(toIntExact(country.getId()))))
-                .andExpect(jsonPath("$.name", is(country.getName())))
-                .andExpect(jsonPath("$.countryCode", is(country.getCountryCode())));
+                .andExpect(jsonPath("$.id", is(toIntExact(movie.getId()))))
+                .andExpect(jsonPath("$.name", is(movie.getName())));
     }
 
     @Test
     public void testCreate() throws Exception {
-        Country country = new Country("testCreate", 4);
+        Movie movie = new Movie("testCreate");
 
-        mockMvc.perform(post("/country/")
+        mockMvc.perform(post("/movie/")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(mapper.writeValueAsBytes(country)))
+                .content(mapper.writeValueAsBytes(movie)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.id", any(Integer.class)))
-                .andExpect(jsonPath("$.name", is(country.getName())))
-                .andExpect(jsonPath("$.countryCode", is(country.getCountryCode())));
+                .andExpect(jsonPath("$.name", is(movie.getName())));
     }
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete("/country/"
-                + countries.get(0).getId()))
+        mockMvc.perform(delete("/movie/"
+                + movies.get(0).getId()))
                 .andExpect(status().isOk());
     }
 

@@ -14,17 +14,24 @@ public class Address {
     @Column(nullable = false)
     private int streetNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IdCity")
-    private City city;
+    @Column(nullable = false)
+    private String cityName;
+    @Column(nullable = true)
+    private String postalCode;
+
+    @Column(nullable = false)
+    private String countryName;
+    @Column(nullable = true)
+    private int countryCode;
 
     public Address() {
     }
 
-    public Address(String street, int streetNumber, City city) {
+    public Address(String street, int streetNumber, String cityName, String countryName) {
         this.street = street;
         this.streetNumber = streetNumber;
-        this.city = city;
+        this.cityName = cityName;
+        this.countryName = countryName;
     }
 
     public long getId() {
@@ -51,11 +58,35 @@ public class Address {
         this.streetNumber = streetNumber;
     }
 
-    public City getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public int getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(int countryCode) {
+        this.countryCode = countryCode;
     }
 }
