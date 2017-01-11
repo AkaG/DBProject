@@ -1,16 +1,20 @@
 package app.controller;
 
-import app.model.Movie;
+/**
+ * Created by jakub on 11.01.17.
+ */
+
+import app.model.Customer;
 import app.repository.AppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/movie")
-public class MovieController extends AppRestController<Movie, Long>{
+@RequestMapping(value = "/customer")
+public class CustomerController extends AppRestController<Customer, Long> {
     @Autowired
-    public MovieController(AppRepository<Movie, Long> repository) {
+    public CustomerController(AppRepository<Customer, Long> repository) {
         super(repository);
     }
 }
