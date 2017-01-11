@@ -8,14 +8,14 @@ import java.util.List;
 @Entity
 @Table(name = "MOVIE_RENTALS")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@NamedStoredProcedureQuery(
-        name = "MovieRental.getMovies",
-        procedureName = "list_mr_movies",
-        resultClasses = Movie.class,
-        parameters = {
-                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "id")
-        }
-)
+//@NamedStoredProcedureQuery(
+//        name = "getMovies",
+//        procedureName = "list_mr_movies",
+//        resultClasses = Integer.class,
+//        parameters = {
+//                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "id")
+//        }
+//)
 public class MovieRental {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
