@@ -1,9 +1,12 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "STAFF")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

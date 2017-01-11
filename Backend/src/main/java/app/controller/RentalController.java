@@ -6,6 +6,7 @@ package app.controller;
 
 import app.model.Rental;
 import app.repository.AppRepository;
+import app.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/rental")
 public class RentalController extends AppRestController<Rental, Long> {
     @Autowired
-    public RentalController(AppRepository<Rental, Long> repository) {
+    public RentalController(RentalRepository repository) {
         super(repository);
     }
 }

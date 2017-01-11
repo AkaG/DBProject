@@ -6,6 +6,7 @@ package app.controller;
 
 import app.model.Customer;
 import app.repository.AppRepository;
+import app.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/customer")
 public class CustomerController extends AppRestController<Customer, Long> {
     @Autowired
-    public CustomerController(AppRepository<Customer, Long> repository) {
+    public CustomerController(CustomerRepository repository) {
         super(repository);
     }
 }

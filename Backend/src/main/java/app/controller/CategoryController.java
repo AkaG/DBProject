@@ -6,6 +6,7 @@ package app.controller;
 
 import app.model.Category;
 import app.repository.AppRepository;
+import app.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/category")
 public class CategoryController extends AppRestController<Category, Long> {
     @Autowired
-    public CategoryController(AppRepository<Category, Long> repository) {
+    public CategoryController(CategoryRepository repository) {
         super(repository);
     }
 }

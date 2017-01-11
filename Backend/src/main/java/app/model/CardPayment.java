@@ -1,5 +1,7 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import java.util.Calendar;
 
 @Entity
 @DiscriminatorValue("CARD")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CardPayment extends Payment {
     private String accountId;
 

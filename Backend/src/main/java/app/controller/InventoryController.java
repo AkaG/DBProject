@@ -6,6 +6,7 @@ package app.controller;
 
 import app.model.Inventory;
 import app.repository.AppRepository;
+import app.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/inventory")
 public class InventoryController extends AppRestController<Inventory, Long> {
     @Autowired
-    public InventoryController(AppRepository<Inventory, Long> repository) {
+    public InventoryController(InventoryRepository repository) {
         super(repository);
     }
 }
