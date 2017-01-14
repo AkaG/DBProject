@@ -16,8 +16,7 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IdMovie")
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<Movie> movies;
 
     public Category() {

@@ -29,21 +29,19 @@ public class MovieRental {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Address address;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY)
     private List<Staff> staff;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY)
     private List<Inventory> inventories;
 
     public MovieRental() {
     }
 
-    public MovieRental(String name, String phone, Address address, List<Staff> staff, List<Inventory> inventories) {
+    public MovieRental(String name, String phone, Address address) {
         this.name = name;
         this.phone = phone;
         this.address = address;
-        this.staff = staff;
-        this.inventories = inventories;
     }
 
     public long getId() {
@@ -82,15 +80,8 @@ public class MovieRental {
         return staff;
     }
 
-    public void setStaff(List<Staff> staff) {
-        this.staff = staff;
-    }
-
     public List<Inventory> getInventories() {
         return inventories;
     }
 
-    public void setInventories(List<Inventory> inventories) {
-        this.inventories = inventories;
-    }
 }

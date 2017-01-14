@@ -27,7 +27,7 @@ public class MovieRentalController extends AppRestController<MovieRental, Long>{
     private StoredQueryService storedQueryService;
 
     @Autowired
-    public MovieRentalController(AppRepository<MovieRental, Long> repository) {
+    public MovieRentalController(MovieRentalRepository repository) {
         super(repository);
     }
 

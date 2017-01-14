@@ -18,7 +18,10 @@ public class Movie {
     private int rating;
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "movies_categories",
+            joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private List<Category> categories;
 
     public Movie() {

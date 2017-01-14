@@ -20,11 +20,11 @@ public class Staff {
     private double salary;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IdAddress")
+    @JoinColumn(name = "address_id")
     Address address;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "IdMovieRental")
+    @JoinColumn(name = "movie_rental_id")
     MovieRental movieRental;
 
     public Staff() {

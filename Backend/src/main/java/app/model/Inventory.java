@@ -15,9 +15,11 @@ public class Inventory implements Serializable{
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_rental_id")
     MovieRental movieRental;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
     Movie movie;
 
     @Column(nullable = false)
