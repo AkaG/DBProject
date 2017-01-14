@@ -11,6 +11,4 @@ import java.util.List;
 @Repository
 public interface MovieRentalRepository extends AppRepository<MovieRental, Long> {
 
-    @Procedure(name = "MovieRental.getMovies", procedureName = "list_mr_movies")
-    Long getMovieRentalMoves(Long id);
 }
