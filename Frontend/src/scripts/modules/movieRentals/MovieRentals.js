@@ -44,14 +44,6 @@ class MovieRentals extends Component {
     };
   }
 
-  handleChange(name, value) {
-    this.setState({
-      data: {
-        [name]: value,
-      },
-    });
-  }
-
   render() {
     const { data } = this.state;
 
@@ -59,7 +51,6 @@ class MovieRentals extends Component {
       <Main>
         <DataForm
           data={ data }
-          handleChange={ this.handleChange.bind(this) }
         />
         <DataTable
           data={ users }

@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 import {
+  Button,
+} from 'ui';
+
+import {
   Table,
   TableHead,
   TableRow,
@@ -25,6 +29,7 @@ export default class DataTable extends Component {
           <TableCell>Address</TableCell>
           <TableCell>Staff</TableCell>
           <TableCell>Inventories</TableCell>
+          <TableCell />
         </TableHead>
         { data.map((item, index) => {
           return (
@@ -34,6 +39,10 @@ export default class DataTable extends Component {
               <TableCell>{ item.address }</TableCell>
               <TableCell>{ item.staff }</TableCell>
               <TableCell>{ item.inventories }</TableCell>
+              <TableCell>
+                <Button icon="edit" floating primary mini />
+                <Button icon="remove" floating primary mini />
+              </TableCell>
             </TableRow>
           );
         }) }
