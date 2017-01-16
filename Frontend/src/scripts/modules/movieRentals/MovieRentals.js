@@ -2,19 +2,8 @@ import React, { Component } from 'react';
 
 import Main from 'components/main';
 
-import {
-  Table,
-} from 'ui';
-
-const UserModel = {
-  name: { type: String },
-  phone: { type: Number },
-  address: { type: String },
-  staff: { type: Number,
-    title: 'Number of staff' },
-  inventories: { type: Number,
-    title: 'Number of inventories' },
-};
+import DataForm from './components/DataForm';
+import DataTable from './components/DataTable';
 
 const users = [
   {
@@ -41,14 +30,39 @@ const users = [
 ];
 
 class MovieRentals extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      data: {
+        name: '',
+        phone: '',
+        address: '',
+        staff: 0,
+        inventories: 0,
+      },
+    };
+  }
+
+  handleChange(name, value) {
+    this.setState({
+      data: {
+        [name]: value,
+      },
+    });
+  }
+
   render() {
+    const { data } = this.state;
+
     return (
       <Main>
-        <Table
-          model={ UserModel }
-          multiSelectable={ false }
-          selectable={ false }
-          source={ users }
+        <DataForm
+          data={ data }
+          handleChange={ this.handleChange.bind(this) }
+        />
+        <DataTable
+          data={ users }
         />
       </Main>
     );

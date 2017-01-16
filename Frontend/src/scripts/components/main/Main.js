@@ -14,8 +14,6 @@ import {
 
 const menu = {
   'Movie Rentals': paths.movieRentals,
-  'Movie Rentals2': '/movieRentals2',
-  'Movie Rentals3': '/movieRentals3',
 };
 
 export default class Main extends Component {
@@ -24,7 +22,7 @@ export default class Main extends Component {
   };
 
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.array,
   };
 
   renderMenuItems() {
