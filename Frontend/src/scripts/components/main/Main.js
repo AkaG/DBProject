@@ -14,6 +14,8 @@ import {
 
 const menu = {
   'Movie Rentals': paths.movieRentals,
+  'Movie Rentals2': '/movieRentals2',
+  'Movie Rentals3': '/movieRentals3',
 };
 
 export default class Main extends Component {
@@ -50,7 +52,8 @@ export default class Main extends Component {
   render() {
     return (
       <div className="root">
-        <AppBar leftIcon="menu"
+        <AppBar fixed
+          leftIcon="menu"
           title="Movie Rental"
         />
         <aside className="navigation">
