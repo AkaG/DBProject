@@ -1,5 +1,7 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Movie> movies;
 
     public Category() {
