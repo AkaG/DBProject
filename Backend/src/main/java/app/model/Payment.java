@@ -21,7 +21,7 @@ public abstract class Payment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     protected Customer customer;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
     protected Rental rental;
 
     public Payment() {

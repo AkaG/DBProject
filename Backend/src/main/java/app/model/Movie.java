@@ -1,6 +1,7 @@
 package app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Movie {
     private int rating;
     private String description;
 
-    @ManyToMany(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Category.class, fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(name = "movies_categories",
             joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))

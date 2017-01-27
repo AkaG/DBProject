@@ -19,7 +19,7 @@ public class Staff {
     @Column(nullable = false)
     private double salary;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id")
     Address address;
 

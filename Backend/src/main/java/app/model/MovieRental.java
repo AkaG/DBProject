@@ -1,12 +1,20 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "MOVIE_RENTALS")
+@Table(name = "MOVIE_RENTALS",
+        indexes = {
+            @Index(columnList = "id", name = "movie_rental_id_idx"),
+            @Index(columnList = "name", name = "movie_rental_name_idx")
+        }
+)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NamedStoredProcedureQuery(
         name = "getMovieRentalMovies",
@@ -26,13 +34,15 @@ public class MovieRental {
     @Column(nullable = false)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     private Address address;
 
-    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<Staff> staff;
 
-    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movieRental", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<Inventory> inventories;
 
     public MovieRental() {
