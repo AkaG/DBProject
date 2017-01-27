@@ -7,6 +7,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "STAFF")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@NamedStoredProcedureQuery(
+        name = "countStaffRecentSales",
+        procedureName = "find_staff_sales",
+        resultClasses = {Long.class},
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class, name = "id")
+        }
+)
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
