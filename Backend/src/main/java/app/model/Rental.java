@@ -1,6 +1,7 @@
 package app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -20,7 +21,7 @@ public class Rental {
     @Temporal(TemporalType.DATE)
     private Calendar returnDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Inventory inventory;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -30,6 +31,7 @@ public class Rental {
     private Staff staff;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonDeserialize(as = CardPayment.class)
     private Payment payment;
 
     public Rental() {
