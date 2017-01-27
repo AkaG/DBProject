@@ -1,8 +1,8 @@
 import { consts } from './actions';
 
 export default function movieRentalsReducer(state = {
-  movieRental: null,
-  movieRentals: null
+  movieRental: {},
+  movieRentals: []
 }, action) {
   switch(action.type) {
     case consts.fetchMovieRentalsSuccess: {

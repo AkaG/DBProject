@@ -9,24 +9,16 @@ import DataTable from './components/DataTable';
 import { fetchMovieRentals, fetchMovieRental } from './actions';
 
 class MovieRentals extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      data: {
-        name: '',
-        phone: '',
-        address: '',
-        staff: 0,
-        inventories: 0,
-      },
-    };
-  }
-
   componentDidMount() {
     const { fetch } = this.props;
 
     fetch();
+  }
+
+  onEditButton(id) {
+    const { fetchOne } = this.props;
+
+    fetchOne(id);
   }
 
   render() {
@@ -35,15 +27,14 @@ class MovieRentals extends Component {
       movieRentals,
     } = this.props;
 
-    const { data } = this.state;
-
     return (
       <Main>
         <DataForm
-          data={ data }
+          data={ movieRental }
         />
         <DataTable
           data={ movieRentals }
+          onEdit={ this.onEditButton.bind(this) }
         />
       </Main>
     );
@@ -66,6 +57,5 @@ const mapDispatchToProps = {
   fetch: fetchMovieRentals,
   fetchOne: fetchMovieRental,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieRentals);

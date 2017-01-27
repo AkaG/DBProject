@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Input } from 'ui';
+import { Input, Button } from 'ui';
 
 export default class DataForm extends Component {
   static propTypes = {
@@ -12,11 +12,7 @@ export default class DataForm extends Component {
 
     this.state = {
       data: {
-        name: '',
-        phone: '',
-        address: '',
-        staff: 0,
-        inventories: 0,
+        address: {}
       },
     };
   }
@@ -30,9 +26,24 @@ export default class DataForm extends Component {
     });
   }
 
+  onAddressChange(name, value) {
+    this.setState({
+      data: {
+        ...this.state.data,
+        address: {
+          ...this.state.data.address,
+          [name]: value,
+        }
+      },
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({
-      data: nextProps.data,
+      data: {
+        ...this.state.data,
+        ...nextProps.data
+      },
     });
   }
 
@@ -41,13 +52,20 @@ export default class DataForm extends Component {
       data,
     } = this.state;
 
+    const {
+      address
+    } = data;
+
     return (
-      <section>
+      <section className="form">
         <Input type="text" label="Name" name="name" value={ data.name } onChange={ this.onChange.bind(this, 'name') } maxLength={ 16 } />
         <Input type="text" label="Phone" name="phone" value={ data.phone } onChange={ this.onChange.bind(this, 'phone') } maxLength={ 16 } />
-        <Input type="text" label="Address" name="address" value={ data.address } onChange={ this.onChange.bind(this, 'address') } maxLength={ 16 } />
-        <Input type="text" label="Staff" name="staff" value={ data.staff } onChange={ this.onChange.bind(this, 'staff') } maxLength={ 16 } />
-        <Input type="text" label="Inventories" name="inventories" value={ data.inventories } onChange={ this.onChange.bind(this, 'inventories') } maxLength={ 16 } />
+        <Input type="text" label="Street" name="address" value={ address.street } onChange={ this.onAddressChange.bind(this, 'street') } maxLength={ 16 } />
+        <Input type="text" label="Street number" name="streetNumber" value={ address.streetNumber } onChange={ this.onAddressChange.bind(this, 'streetNumber') } maxLength={ 16 } />
+        <Input type="text" label="Postal code" name="postalCode" value={ address.postalCode } onChange={ this.onAddressChange.bind(this, 'postalCode') } maxLength={ 16 } />
+        <Input type="text" label="Country" name="countryName" value={ address.countryName } onChange={ this.onAddressChange.bind(this, 'countryName') } maxLength={ 16 } />
+        <Input type="text" label="Country code" name="countryCode" value={ address.countryCode } onChange={ this.onAddressChange.bind(this, 'countryCode') } maxLength={ 16 } />
+        <Button icon="bookmark" label="Save" raised primary />
       </section>
     );
   }

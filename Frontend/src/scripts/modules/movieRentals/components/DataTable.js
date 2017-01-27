@@ -48,7 +48,7 @@ export default class DataTable extends Component {
               <TableCell>{ item.address.postalCode }</TableCell>
               <TableCell>{ item.address.countryName } ({ item.address.countryCode })</TableCell>
               <TableCell>
-                <Button icon="edit" floating primary mini />
+                <Button icon="edit" onClick={ this.props.onEdit.bind(null, item.id) } floating primary mini />
                 <Button icon="remove" floating primary mini />
               </TableCell>
             </TableRow>
