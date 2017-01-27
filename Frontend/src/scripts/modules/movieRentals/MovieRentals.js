@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Main from 'components/main';
 
 import DataForm from './components/DataForm';
 import DataTable from './components/DataTable';
 
-const users = [
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-];
+import { fetchMovieRentals, fetchMovieRental } from './actions';
 
 class MovieRentals extends Component {
   constructor() {
@@ -44,7 +23,18 @@ class MovieRentals extends Component {
     };
   }
 
+  componentDidMount() {
+    const { fetch } = this.props;
+
+    fetch();
+  }
+
   render() {
+    const {
+      movieRental,
+      movieRentals,
+    } = this.props;
+
     const { data } = this.state;
 
     return (
@@ -53,11 +43,29 @@ class MovieRentals extends Component {
           data={ data }
         />
         <DataTable
-          data={ users }
+          data={ movieRentals }
         />
       </Main>
     );
   }
 }
 
-export default MovieRentals;
+function mapStateToProps(state) {
+  const {
+    movieRentals,
+    movieRental
+  } = state.movieRentals;
+
+  return {
+    movieRentals,
+    movieRental
+  };
+}
+
+const mapDispatchToProps = {
+  fetch: fetchMovieRentals,
+  fetchOne: fetchMovieRental,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieRentals);
