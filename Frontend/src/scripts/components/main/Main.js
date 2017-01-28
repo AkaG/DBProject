@@ -22,7 +22,7 @@ export default class Main extends Component {
   };
 
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.array,
   };
 
   renderMenuItems() {
@@ -50,7 +50,8 @@ export default class Main extends Component {
   render() {
     return (
       <div className="root">
-        <AppBar leftIcon="menu"
+        <AppBar fixed
+          leftIcon="menu"
           title="Movie Rental"
         />
         <aside className="navigation">

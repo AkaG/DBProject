@@ -1,4 +1,4 @@
-@import '~ui/commons';
+// @import '~ui/commons';
 
 $font-size-h1: 2rem;
 $font-size-h2: 1.5rem;
@@ -6,3 +6,18 @@ $font-size-h3: 1rem;
 $font-size-h4: 1rem;
 $font-size-h5: 1rem;
 $font-size-h6: 1rem;
+
+.content {
+  table button:last-child {
+    margin-left: 5px;
+  }
+}
+
+.form {
+  margin-bottom: 40px;
+
+  button {
+    margin-top: 20px;
+    float: right;
+  }
+}

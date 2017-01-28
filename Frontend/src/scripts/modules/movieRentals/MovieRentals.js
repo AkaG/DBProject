@@ -1,58 +1,61 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Main from 'components/main';
 
-import {
-  Table,
-} from 'ui';
+import DataForm from './components/DataForm';
+import DataTable from './components/DataTable';
 
-const UserModel = {
-  name: { type: String },
-  phone: { type: Number },
-  address: { type: String },
-  staff: { type: Number,
-    title: 'Number of staff' },
-  inventories: { type: Number,
-    title: 'Number of inventories' },
-};
-
-const users = [
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-  {
-    name: 'Test Name 100',
-    phone: '+48 234 234 234',
-    address: 'Poland',
-    staff: 20,
-    inventories: 100,
-  },
-];
+import { fetchMovieRentals, fetchMovieRental } from './actions';
 
 class MovieRentals extends Component {
+  componentDidMount() {
+    const { fetch } = this.props;
+
+    fetch();
+  }
+
+  onEditButton(id) {
+    const { fetchOne } = this.props;
+
+    fetchOne(id);
+  }
+
   render() {
+    const {
+      movieRental,
+      movieRentals,
+    } = this.props;
+
     return (
       <Main>
-        <Table
-          model={ UserModel }
-          multiSelectable={ false }
-          selectable={ false }
-          source={ users }
+        <DataForm
+          data={ movieRental }
+        />
+        <DataTable
+          data={ movieRentals }
+          onEdit={ this.onEditButton.bind(this) }
         />
       </Main>
     );
   }
 }
 
-export default MovieRentals;
+function mapStateToProps(state) {
+  const {
+    movieRentals,
+    movieRental
+  } = state.movieRentals;
+
+  return {
+    movieRentals,
+    movieRental
+  };
+}
+
+const mapDispatchToProps = {
+  fetch: fetchMovieRentals,
+  fetchOne: fetchMovieRental,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieRentals);
